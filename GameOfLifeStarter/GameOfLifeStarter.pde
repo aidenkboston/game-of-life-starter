@@ -8,7 +8,7 @@ void setup() {
   frameRate(10); // controls speed of regeneration
   grid = new int[height / SPACING][width / SPACING];
 
-  // populate initial grid
+  // populate initial grid.
   // your code here
 
 }
