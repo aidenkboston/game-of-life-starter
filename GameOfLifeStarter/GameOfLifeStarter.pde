@@ -43,7 +43,14 @@ int[][] calcNextGrid() {
 
 int countNeighbors(int x, int y) {
   int n = 0;
-  n = grid[x + 1][y] + grid[x + 1][y + 1] + grid[x][y + 1] + grid[x - 1][y - 1] + grid[x - 1][y] + grid[x][y - 1] + grid[x - 1][y + 1] + grid[x + 1][y - 1];
+  if (grid[x + 1][y] != 0) n++;
+  if (grid[x + 1][y + 1] != 0) n++;
+  if (grid[x][y + 1] != 0) n++;
+  if (grid[x - 1][y - 1] != 0) n++;
+  if (grid[x - 1][y] != 0) n++;
+  if (grid[x][y - 1] != 0) n++;
+  if (grid[x - 1][y + 1] != 0) n++;
+  if (grid[x + 1][y - 1] != 0) n++;
   return n;
 }
 
@@ -54,7 +61,7 @@ void showGrid() {
       if (grid[i][j] == 0) {
         fill(0, 0, 0);
       } else {
-        fill(255 - 50 * grid[i][j], 0, 50 * grid[i][j]);
+        fill(305 - 50 * grid[i][j], 0, -50 + 50 * grid[i][j]);
       }      
     }
   }  
