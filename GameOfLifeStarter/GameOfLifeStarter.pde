@@ -8,8 +8,6 @@ void setup() {
   frameRate(10); // controls speed of regeneration
   grid = new int[height / SPACING][width / SPACING];
 
-  // populate initial grid.
-  // your code here
   for (int i = 0; i < grid.length; i++) {
     for (int j = 0; j < grid[0].length; j++) {
       if (Math.random() < DENSITY) {
@@ -19,8 +17,6 @@ void setup() {
       }
     }
   }
-  
-
 }
 
 void draw() {
@@ -30,25 +26,28 @@ void draw() {
 
 int[][] calcNextGrid() {
   int[][] nextGrid = new int[grid.length][grid[0].length];
-
-  // your code here
-
+   for (int i = 1; i < grid.length - 1; i++) {
+     for (int j = 1; j < grid[0].length - 1; j++) {
+      int neighbors = countNeighbors(i, j);
+      if (grid[i][j] == 0 && neighbors == 3) {
+        nextGrid[i][j] = 1;
+      } else if (neighbors == 2 || neighbors == 3) {
+        nextGrid[i][j] = grid[i][j] + 1;
+      } else {
+        nextGrid[i][j] = 0;
+      }
+    }
+  }
   return nextGrid;
 }
 
-int countNeighbors(int y, int x) {
-  int n = 0; // don't count yourself!
-  
-  // your code here
-  // don't check out-of-bounds cells
-
+int countNeighbors(int x, int y) {
+  int n = 0;
+  n = grid[x + 1][y] + grid[x + 1][y + 1] + grid[x][y + 1] + grid[x - 1][y - 1] + grid[x - 1][y] + grid[x][y - 1] + grid[x - 1][y + 1] + grid[x + 1][y - 1];
   return n;
 }
 
 void showGrid() {
-  // your code here
-  // use square() to represent each cell
-  // use fill(r, g, b) to control color: black for empty, red for filled (or alive)
   for (int i = 0; i < grid.length; i++) {
     for (int j = 0; j < grid[0].length; j++) {
       square(j * SPACING, i * SPACING, SPACING);
@@ -58,6 +57,5 @@ void showGrid() {
         fill(255, 255, 255);
       }      
     }
-  }
-  
+  }  
 }
