@@ -4,10 +4,10 @@ int[][] grid; // the 2D array to hold 0's and 1's
 
 void setup() {
   size(800, 600); // adjust accordingly, make sure it's a multiple of SPACING
+  background(0, 0, 0);
   noStroke(); // don't draw the edges of each cell
-  frameRate(10); // controls speed of regeneration
+  frameRate(5); // controls speed of regeneration
   grid = new int[height / SPACING][width / SPACING];
-
   for (int i = 0; i < grid.length; i++) {
     for (int j = 0; j < grid[0].length; j++) {
       if (Math.random() < DENSITY) {
@@ -26,10 +26,10 @@ void draw() {
 
 int[][] calcNextGrid() {
   int[][] nextGrid = new int[grid.length][grid[0].length];
-   for (int i = 1; i < grid.length - 1; i++) {
-     for (int j = 1; j < grid[0].length - 1; j++) {
+  for (int i = 1; i < grid.length - 1; i++) {
+    for (int j = 1; j < grid[0].length - 1; j++) {
       int neighbors = countNeighbors(i, j);
-      if (grid[i][j] == 0 && neighbors == 3) {
+      if (grid[i][j] == 0 && neighbors == 3) {       
         nextGrid[i][j] = 1;
       } else if (neighbors == 2 || neighbors == 3) {
         nextGrid[i][j] = grid[i][j] + 1;
@@ -50,11 +50,11 @@ int countNeighbors(int x, int y) {
 void showGrid() {
   for (int i = 0; i < grid.length; i++) {
     for (int j = 0; j < grid[0].length; j++) {
-      square(j * SPACING, i * SPACING, SPACING);
-      if (grid[i][j] == 1) {
-        fill(255, 0, 0);
+      square(j * SPACING - SPACING, i * SPACING, SPACING);
+      if (grid[i][j] == 0) {
+        fill(0, 0, 0);
       } else {
-        fill(255, 255, 255);
+        fill(255 - 50 * grid[i][j], 0, 50 * grid[i][j]);
       }      
     }
   }  
